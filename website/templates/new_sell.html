@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+<div class="container">
+<h1>Agregar Venta</h1>
+  <form method="POST" action="{% url 'new_sell' %}">
+    {% csrf_token %}
+<p>
+    <label for="id_seller">Vendedor:</label>
+    <select name="seller" required id="id_seller">
+  <option value="" selected>---------</option>
+    {% for seller in sellers%}
+  <option value="{{seller.id}}">{{seller.name}}</option>
+    {% endfor %}
+</select>
+</p>
+
+<p>
+    <label for="id_product_inv">Producto</label>
+    <select name="product_inv" required id="id_product_inv">
+  <option value="" selected>---------</option>
+    {% for product in products %}
+  <option value="{{ product.product_id}}">{{product.product.name}} - {{product.price_seller }}Bs.</option>
+    {% endfor %}
+</select>
+  </p>
+<p>
+    <label for="id_quantity_sold">Cantidad:</label>
+    <input type="number" name="quantity_sold" min="0" required id="id_quantity_sold">
+    
+    
+  </p>
+  <p>
+    <label for="id_selling_price">Precio vendido</label>
+    <input type="number" name="selling_price" step="1" required id="id_selling_price">
+  </p>
+<!--
+  <p>
+    <label for="id_profit_seller">Profit seller:</label>
+    <input type="number" name="profit_seller" value="0" step="1" required id="id_profit_seller">
+  </p>
+-->
+    <input type="hidden" value="{{user.username}}"  name="registredby" id="registredby">
+    <button type="submit">Agregar Venta</button>
+  </form>
+</div>
+
+
+{% endblock %}

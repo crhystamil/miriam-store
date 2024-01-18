@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% for seller in sellers %}
+        <li class="nav nav-pills">
+          <a class="nav-link " aria-current="page" href="/sellu/?id={{seller.id}}">{{seller.name}}</a>
+        </li>
+       {% endfor %}
+      </ul>
+{% if request.path == '/sellu/'%}
+<form method='POST' action='/genprof'>
+{%csrf_token%}
+    <input value='{{id_seller}}' type='hidden' id='seller_id' name='seller_id'>
+    <button type="submit" type="button" class="btn btn-danger">Generar Ganancia</button>
+</form>
+{% endif %}
+    </div>
+  </div>
+</nav>
+
+
+<h1>Listado de Ventas</h1>
+
+  <table class="table table-striped" >
+    <thead>
+      <tr>
+        <th scope="col">Vendedor</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Precio V.</th>
+        <th scope="col">Ganancia</th>
+        <th scope="col">Fecha Venta</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sale in sales %}
+        <tr>
+          <td>{{ sale.seller.name }}</td>
+          <td>{{ sale.product_inv.product.name }}</td>
+          <td>{{ sale.quantity_sold }}</td>
+          <td>{{ sale.product_inv.price_seller}}</td>
+          <td>Bs{{ sale.selling_price }}</td>
+          <td>Bs {{ sale.profit_seller}}</td>
+          <td>{{ sale.created }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p>Total ganancias del mes: Bs. {{profit}}</p>
+
+{% endblock %}

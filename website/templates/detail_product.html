@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<main>
+
+
+  <section class="py-5 text-center container">
+
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% for brand in brands %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/brand/{{brand.id}}">{{brand.name}}</a>
+        </li>
+       {% endfor %}
+      </ul>
+      <form class="d-flex" role="search" action="/search/" method="GET">
+        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" id="item" name="item">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+  </section>
+
+
+<div class="container my-5">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="main-img">
+                    <img class="img-fluid" src="{{ product.product.images.first.imagen.url}}" alt="ProductS" id="imagenPrincipal" >
+                    <div class="row my-3 previews">
+                        {% for image in product.product.images.all %}
+                        <div class="col-md-3">
+                            <img class="w-100" src="{{ image.imagen.url }}" alt="Sale" onclick="cambiarImagen('{{ image.imagen.url }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="main-description px-2">
+                    <div class="category text-bold">
+                        Category: Repuesto
+                    </div>
+                    <div class="product-title text-bold my-3">
+                        {{product.name}}
+                    </div>
+
+
+                    <div class="price-area my-4">
+                        <p class="old-price mb-1">{{ product.price }} Bs. <span class="old-price-discount text-danger"></span></p>
+                    </div>
+                    <div class="buttons d-flex my-5  " >
+                        <div class="block ">
+                            <a href="https://wa.me/59169546901?text={{product.product.name}}" class="shadow btn custom-btn btn btn-primary" target="_blank">Comprar</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="product-details my-4">
+                    <p class="details-title text-color mb-1">Detalles del producto.</p>
+                    <p class="description">{{product.product.description}}</p>
+                </div>
+              
+                         <div class="row questions bg-light p-3">
+                    <div class="col-md-1 icon">
+                        <i class="fa-brands fa-rocketchat questions-icon"></i>
+                    </div>
+                    <div class="col-md-11 text">
+                        Para mayor informacion puede escribirnos al
+                            <a href="https://wa.me/59169546901?text={{product.product.name}}" class="shadow btn custom-btn btn btn-success" target="_blank">WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="delivery my-4">
+                    <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-truck"></i></span> <b>Los envios se pueden realizar a nivel nacional, previa coordinacion por whatsapp</b> </p>
+                </div>
+                <div class="delivery-options my-4">
+                    <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-filter"></i></span> <b></b> </p>
+                    <p class="text-secondary"></p>
+                </div>
+                
+             
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cambiarImagen(nuevaSrc) {
+            var imagenPrincipal = document.getElementById('imagenPrincipal');
+            imagenPrincipal.src = nuevaSrc;
+        }
+    </script>
+
+
+{% endblock %}

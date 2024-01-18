@@ -8,6 +8,8 @@ media
 *.jpg
 *.png
 *.txt
+*.js
+*.css
 
 # Backup files # 
 *.bak 

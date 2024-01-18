@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+<div class="container">
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>Cantidad</th>
+      <th>Producto</th>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Costo</th>
+      <th>Precio</th>
+      <th>Ver</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in inventory %}
+    <tr>
+      <td>{{product.quantity}}</td>
+      <td>
+        <div class="d-flex align-items-center">
+          <img
+              src="{{ product.product.images.first.imagen.url}}"
+              alt=""
+              style="width: 45px; height: 45px"
+              class="rounded-circle"
+              />
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">{{ product.product.name}}</p>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">{{product.product.description|truncatewords:10}}</p>
+      </td>
+      <td>{{product.cost}}</td>
+      <td>{{product.price}}</td>
+      <td>
+        <button type="button" class="btn btn-link btn-sm btn-rounded">
+          <a href="/product/{{product.product.id}}" target="blank">Ver</a>
+        </button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
