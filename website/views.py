@@ -14,7 +14,7 @@ def contact(request):
 
 def products(request):
     brands = Brand.objects.all()
-    products = Inventory.objects.filter(state="1")
+    products = Inventory.objects.filter(state="1", quantity__gte=1)
     return render(request, 'products.html', {'title':'Productos', 'brands':brands, 'products':products})
 
 def product_detail(request, product_id):
@@ -74,6 +74,8 @@ def new_sell(request):
         if request.user.is_staff and request.user.username == request.POST['registredby']:
             form = SellForm(request.POST)
             if form.is_valid():
+                q = Inventory.objects.get(pk=request.POST['product_inv']).quantity - int(request.POST['quantity_sold'])
+                Inventory.objects.filter(pk=request.POST['product_inv']).update(quantity=q)
                 form.save()
                 return redirect('sell')
             else:
@@ -82,7 +84,7 @@ def new_sell(request):
             return redirect('home')
     else:
         if request.user.is_staff:
-            products = Inventory.objects.filter(state='1')
+            products = Inventory.objects.filter(state='1', quantity__gte=1)
             seller = Seller.objects.all()
             return render(request, 'new_sell.html', {'products': products, 'sellers':seller})
         return redirect('home')

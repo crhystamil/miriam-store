@@ -22,7 +22,7 @@
     <select name="product_inv" required id="id_product_inv">
   <option value="" selected>---------</option>
     {% for product in products %}
-  <option value="{{ product.product_id}}">{{product.product.name}} - {{product.price_seller }}Bs.</option>
+    <option value="{{ product.id}}">{{product.quantity}} -{{product.product.name}} - {{product.price_seller }}Bs.</option>
     {% endfor %}
 </select>
   </p>

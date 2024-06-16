@@ -12,7 +12,7 @@ class Product(models.Model):
     brand = models.ManyToManyField(Brand)
     tag = models.TextField()
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.id} - {self.name}"
 
 class ImageProduct(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
@@ -29,7 +29,7 @@ class Inventory(models.Model):
     state = models.TextField(max_length=100, choices=[("1","Disponible"),("2","No Disponible")],default='1')
     created = models.DateField(default=timezone.now, editable=False)
     def __str__(self):
-        return f"{self.product} - quantity: {self.quantity}, price: {self.price}"
+        return f"{self.id} - {self.product} - quantity: {self.quantity}, price: {self.price}"
 
 class Seller(models.Model):
     name = models.CharField(max_length=100, null=True)
