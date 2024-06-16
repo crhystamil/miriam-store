@@ -11,6 +11,7 @@ media
 *.js
 *.css
 
+migrations/*
 # Backup files # 
 *.bak 
 
