@@ -40,7 +40,7 @@
                 <img class="card-img-top" src="{{product.product.images.first.imagen.url}}" style="width: 100%; height: 270px;" >
             </div>
             <div class="card-body">
-              <h4>{{product.product.name|truncatewords:3}}</h4>
+              <h4>{{product.product.name|slice:'6:'}}</h4>
               <p class="card-text">{{product.product.description|truncatewords:5}}</p> 
               <p class="text-right">{{product.price}} Bs.</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -48,7 +48,7 @@
                   <a href="/product/{{product.product.id}}"><button type="button" class="btn btn-primary  btn-sm ">Mas Inf.</button></a>
                 </div>
                 <div class="btn-group" role="group" >
-                  <a href="https://wa.me/59169546901?text={{product.product.name}}con el ID:{{product.product.id}}" target="_blank"><button type="button" class="btn btn-sm btn-success">Comprar</button></a>
+                  <a href="https://wa.me/59169546901?text=Hola quiero mas informacion del producto. https://{{ request.get_host }}/product/{{product.product.id}}" target="_blank"><button type="button" class="btn btn-sm btn-success">Comprar</button></a>
                 </div>
               </div>
             </div>

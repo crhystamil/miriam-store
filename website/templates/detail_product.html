@@ -33,6 +33,7 @@
 
 <div class="container my-5">
         <div class="row">
+
             <div class="col-md-5">
                 <div class="main-img">
                     <img class="img-fluid" src="{{ product.product.images.first.imagen.url}}" alt="ProductS" id="imagenPrincipal" >
@@ -47,20 +48,21 @@
             </div>
             <div class="col-md-7">
                 <div class="main-description px-2">
+                                          <h2><b>{{product.product.name}}</b></h2>
+
                     <div class="category text-bold">
-                        Category: Repuesto
+                      <!--Category: Repuestos-->
                     </div>
                     <div class="product-title text-bold my-3">
-                        {{product.name}}
                     </div>
 
 
                     <div class="price-area my-4">
-                        <p class="old-price mb-1">{{ product.price }} Bs. <span class="old-price-discount text-danger"></span></p>
+                      <p class="old-price mb-1" style="color:black;font-size:25px;"><b>{{ product.price }} Bs.</b> </p>
                     </div>
                     <div class="buttons d-flex my-5  " >
                         <div class="block ">
-                            <a href="https://wa.me/59169546901?text={{product.product.name}}" class="shadow btn custom-btn btn btn-primary" target="_blank">Comprar</a>
+                          <a href="https://wa.me/59169546901?text=Hola estoy intersado en comprar el producto {{product.product.name}} de la pagina {{ request.build_absolute_uri }}" class="shadow btn custom-btn btn btn-primary" target="_blank">Comprar</a>
                         </div>
                     </div>
 
@@ -77,7 +79,7 @@
                     </div>
                     <div class="col-md-11 text">
                         Para mayor informacion puede escribirnos al
-                            <a href="https://wa.me/59169546901?text={{product.product.name}}" class="shadow btn custom-btn btn btn-success" target="_blank">WhatsApp</a>
+                        <a href="https://wa.me/59169546901?text=Hola necesito mas informacion sobre el producto. {{request.build_absolute_uri}}" class="shadow btn custom-btn btn btn-success" target="_blank">WhatsApp</a>
                     </div>
                 </div>
 

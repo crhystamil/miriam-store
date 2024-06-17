@@ -46,7 +46,7 @@ def list_inventory_seller(request):
 
 def list_inventory(request):
     if request.user.is_staff:
-        inventory = Inventory.objects.filter(state='1')
+        inventory = Inventory.objects.filter(state='1').order_by('quantity')
         return render(request, 'list_inventory.html', {'title':'Lista de Inventario', 'inventory':inventory})
     else:
         return redirect('home')
@@ -101,7 +101,7 @@ def calculate_profit_seller(request):
             sale_price_sell = sale.selling_price
             profit = (sale_quantity * sale_price_sell) - (price_inv * sale_quantity) 
             Sale.objects.filter(pk=sell_id).update(profit_seller=profit)
-        return redirect('sell')
+        return redirect("/sellu/?id="+request.POST['seller_id'])
     else:
         return redirect('home')
 
